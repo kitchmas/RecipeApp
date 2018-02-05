@@ -1,0 +1,19 @@
+﻿@model RecipeApp.WebUI.Models.RecipesViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+<table class="table">
+    @foreach (var recipe in Model.Recipes)
+    {
+      @Html.Partial("RecipeSummary",recipe)
+    }
+</table>

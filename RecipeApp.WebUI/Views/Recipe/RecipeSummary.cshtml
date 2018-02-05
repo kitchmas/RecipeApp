@@ -1,0 +1,12 @@
+﻿@model RecipeApp.Domain.Entities.Recipe
+
+<tr>
+    <td>@Html.DisplayFor(r => Model.RecipeID)</td>
+    <td>@Html.DisplayFor(r => Model.Name)</td>
+    <td>@Html.DisplayFor(r => Model.Description)</td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new {id = Model.RecipeID}) |
+        @Html.ActionLink("Details", "Details", new { id = Model.RecipeID}) |
+        @Html.ActionLink("Delete", "Delete", new {id = Model.RecipeID})
+    </td>
+</tr>

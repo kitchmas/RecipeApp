@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D1A840AC-3E3D-4C36-B2DF-3A74945B8647}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RecipeApp.Domain</RootNamespace>
+    <AssemblyName>RecipeApp.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\IIngredientRepository.cs" />
+    <Compile Include="Abstract\IRecipeRepository.cs" />
+    <Compile Include="Abstract\IUnitOfMeasurementRepository.cs" />
+    <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFIngredientRepository.cs" />
+    <Compile Include="Concrete\EFRecipeRepository.cs" />
+    <Compile Include="Concrete\EFUnitOfMeasurmentRepository.cs" />
+    <Compile Include="Entities\Ingredient.cs" />
+    <Compile Include="Entities\Recipe.cs" />
+    <Compile Include="Entities\RecipeIngredient.cs" />
+    <Compile Include="Entities\UnitOfMeasurement.cs" />
+    <Compile Include="Migrations\201802022019484_init.cs" />
+    <Compile Include="Migrations\201802022019484_init.Designer.cs">
+      <DependentUpon>201802022019484_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022029206_init 2.cs" />
+    <Compile Include="Migrations\201802022029206_init 2.Designer.cs">
+      <DependentUpon>201802022029206_init 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022039036_init 3.cs" />
+    <Compile Include="Migrations\201802022039036_init 3.Designer.cs">
+      <DependentUpon>201802022039036_init 3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022059208_init 4.cs" />
+    <Compile Include="Migrations\201802022059208_init 4.Designer.cs">
+      <DependentUpon>201802022059208_init 4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022101012_a.cs" />
+    <Compile Include="Migrations\201802022101012_a.Designer.cs">
+      <DependentUpon>201802022101012_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022103014_b.cs" />
+    <Compile Include="Migrations\201802022103014_b.Designer.cs">
+      <DependentUpon>201802022103014_b.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022104389_c.cs" />
+    <Compile Include="Migrations\201802022104389_c.Designer.cs">
+      <DependentUpon>201802022104389_c.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022106524_d.cs" />
+    <Compile Include="Migrations\201802022106524_d.Designer.cs">
+      <DependentUpon>201802022106524_d.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022109049_e.cs" />
+    <Compile Include="Migrations\201802022109049_e.Designer.cs">
+      <DependentUpon>201802022109049_e.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022118272_f.cs" />
+    <Compile Include="Migrations\201802022118272_f.Designer.cs">
+      <DependentUpon>201802022118272_f.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022128039_g.cs" />
+    <Compile Include="Migrations\201802022128039_g.Designer.cs">
+      <DependentUpon>201802022128039_g.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022157447_g1.cs" />
+    <Compile Include="Migrations\201802022157447_g1.Designer.cs">
+      <DependentUpon>201802022157447_g1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022200138_h.cs" />
+    <Compile Include="Migrations\201802022200138_h.Designer.cs">
+      <DependentUpon>201802022200138_h.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802022204078_i.cs" />
+    <Compile Include="Migrations\201802022204078_i.Designer.cs">
+      <DependentUpon>201802022204078_i.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802022019484_init.resx">
+      <DependentUpon>201802022019484_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022029206_init 2.resx">
+      <DependentUpon>201802022029206_init 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022039036_init 3.resx">
+      <DependentUpon>201802022039036_init 3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022059208_init 4.resx">
+      <DependentUpon>201802022059208_init 4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022101012_a.resx">
+      <DependentUpon>201802022101012_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022103014_b.resx">
+      <DependentUpon>201802022103014_b.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022104389_c.resx">
+      <DependentUpon>201802022104389_c.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022106524_d.resx">
+      <DependentUpon>201802022106524_d.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022109049_e.resx">
+      <DependentUpon>201802022109049_e.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022118272_f.resx">
+      <DependentUpon>201802022118272_f.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022128039_g.resx">
+      <DependentUpon>201802022128039_g.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022157447_g1.resx">
+      <DependentUpon>201802022157447_g1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022200138_h.resx">
+      <DependentUpon>201802022200138_h.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802022204078_i.resx">
+      <DependentUpon>201802022204078_i.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
