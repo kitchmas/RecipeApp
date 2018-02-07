@@ -17,14 +17,21 @@ namespace RecipeApp.WebUI
             //    new { controller = "Home", action = "Index" }
             //    );
 
-            ////routes.MapRoute(null, "Recipe/Edit/{id}",
-            ////    new { controller = "Recipe", action = "edit", id = "id"});
+            //routes.MapRoute(null, "Recipe/Edit/{id}",
+            //    new { controller = "Recipe", action = "edit", id = "id"});
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
+
+            routes.MapRoute(null, "",
+                new { controller = "Home", action = "Index" }
+                );
+
         }
     }
 }

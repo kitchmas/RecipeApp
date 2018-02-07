@@ -57,7 +57,6 @@ C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\bin\Debug\System.Web.WebPages.xml
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.csprojResolveAssemblyReference.cache
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.Migrations.init.resources
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.Migrations.init2.resources
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.Migrations.init3.resources

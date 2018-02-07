@@ -10,6 +10,6 @@ namespace RecipeApp.Domain.Abstract
     public interface IIngredientRepository
     {
         IEnumerable<Ingredient> Ingredients { get; }
-          
+        void SaveIngredient(Ingredient ingredient);
     }
 }

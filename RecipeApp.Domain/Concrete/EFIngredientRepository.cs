@@ -15,5 +15,22 @@ namespace RecipeApp.Domain.Concrete
         {
             get { return context.Ingredients; }
         }
+
+        public void SaveIngredient(Ingredient ingredient)
+        {
+            if (ingredient.IngredientID == 0)
+            {
+                context.Ingredients.Add(ingredient);
+            }
+            else
+            {
+                Ingredient dbEntry = context.Ingredients.Find(ingredient.IngredientID);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = ingredient.Name;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }

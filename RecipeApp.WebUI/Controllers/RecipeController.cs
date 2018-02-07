@@ -23,19 +23,29 @@ namespace RecipeApp.WebUI.Controllers
         }
 
         // GET: Recipe
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
             var viewModel = new RecipesViewModel()
             {
-                Recipes = repository.Recipes.OrderBy(r => r.Name),
+                Recipes = repository.Recipes.OrderBy(r => r.Name)
             };
-
-            if (id != null)
-            {
-                viewModel.RecipeIngredients = viewModel.Recipes.Where(r => r.RecipeID == id).Single().RecipeIngredients;
-            }
+            //if (id != null)
+            //{
+            //    viewModel.RecipeIngredients = viewModel.Recipes.Where(r => r.RecipeID == id).Single().RecipeIngredients;
+            //}
 
             return View(viewModel);
+        }
+
+        public ActionResult Details(int id)
+        {
+            Recipe recipe = repository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
+            if (recipe == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(recipe);
         }
 
         public ActionResult Create()
@@ -45,7 +55,7 @@ namespace RecipeApp.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name, Description, Method")]Recipe recipe)
+        public ActionResult Edit(Recipe recipe)
         {
             try
             {
@@ -63,13 +73,8 @@ namespace RecipeApp.WebUI.Controllers
             return View(recipe);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             Recipe recipe = repository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
             if(recipe == null)
             {
@@ -77,6 +82,29 @@ namespace RecipeApp.WebUI.Controllers
             }
 
             return View(recipe);
+        }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            Recipe dbRecipe = repository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
+            if(dbRecipe == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(dbRecipe);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult Delete_Post(int id)
+        {
+            Recipe deletedRecipe = repository.DeleteRecipe(id);
+            if(deletedRecipe != null)
+            {
+                TempData["message"] = string.Format("{0} was deleted", deletedRecipe.Name);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -203,6 +203,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RecipeIngredientViewModel.cs" />
     <Compile Include="Models\RecipesViewModel.cs" />
     <Compile Include="Models\RecipeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -266,6 +267,8 @@
     <Content Include="Views\Recipe\Index.cshtml" />
     <Content Include="Views\Recipe\RecipeSummary.cshtml" />
     <Content Include="Views\Recipe\Edit.cshtml" />
+    <Content Include="Views\Recipe\Details.cshtml" />
+    <Content Include="Views\Recipe\Delete.cshtml" />
     <Content Include="Views\RecipeIngredient\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,37 +1,41 @@
-﻿@model RecipeApp.Domain.Entities.RecipeIngredient
+﻿@model RecipeApp.WebUI.Models.RecipeIngredientViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RecipeIngredient</h4>
+        <h4>RecipeIngredientViewModel</h4>
         <hr />
+        @Html.HiddenFor(model => model.RecipeID)
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @Html.HiddenFor(model => model.RecipeID)
+        @Html.HiddenFor(model => model.RecipeIngredientID)
+        @Html.HiddenFor(model => model.IngredientID)
+        @Html.HiddenFor(model => model.UnitOfMeasurementID)
+
         <div class="form-group">
-            <label class="control-label col-md-2" for="IngredientID">Name</label>
+            @Html.LabelFor(model => model.IngredientName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IngredientID", String.Empty)
-                @Html.ValidationMessageFor(model => model.IngredientID)
+                @Html.EditorFor(model => model.IngredientName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IngredientName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="IngredientID">Unit of Measurment</label>
+            @Html.LabelFor(model => model.UnitOfMeasurement, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("UnitOfMeasurementID", String.Empty)
-                @Html.ValidationMessageFor(model => model.UnitOfMeasurementID, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.UnitOfMeasurement, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UnitOfMeasurement, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.UnitOfMeasurementID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UnitOfMeasurementID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UnitOfMeasurementID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

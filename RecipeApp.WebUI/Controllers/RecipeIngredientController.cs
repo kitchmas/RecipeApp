@@ -26,11 +26,39 @@ namespace RecipeApp.WebUI.Controllers
         }
 
         // GET: RecipeIngredient
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            PopulateIngredientsDropDown();
-            PopulateUnitOfMeasurmentDropDown();
-            return View("Edit", new RecipeIngredient());
+            RecipeIngredientViewModel recipeIngredient = new RecipeIngredientViewModel();
+            recipeIngredient.RecipeID = id;
+
+            return View("Edit", recipeIngredient);
+        }
+
+        public ActionResult Edit(RecipeIngredientViewModel recipeIngredientViewModel)
+        {
+            Ingredient ingredient;
+            if(recipeIngredientViewModel.IngredientID == 0)
+            {
+                ingredient = new Ingredient()
+                {
+                   Name = recipeIngredientViewModel.IngredientName
+                };
+            }
+            else
+            {
+                ingredient = ingredientRepository.Ingredients.Where(i => i.IngredientID == recipeIngredientViewModel.IngredientID).FirstOrDefault();
+            }
+            ingredientRepository.SaveIngredient(ingredient);.
+
+
+            //Make the same for UnitOfMeasurement
+
+            RecipeIngredient recipeIngredient = new RecipeIngredient()
+            {
+                RecipeIngredientID = recipeIngredientViewModel.RecipeIngredientID,
+                IngredientID = ingredient.IngredientID,
+                RecipeID = recipeIngredientViewModel.RecipeID,
+            };
         }
 
         private void PopulateIngredientsDropDown(object selectedIngredient = null)
