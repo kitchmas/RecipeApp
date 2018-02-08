@@ -29,6 +29,7 @@ namespace RecipeApp.WebUI.Infrastructure
             kernel.Bind<IRecipeRepository>().To<EFRecipeRepository>();
             kernel.Bind<IIngredientRepository>().To<EFIngredientRepository>();
             kernel.Bind<IUnitOfMeasurementRepository>().To<EFUnitOfMeasurmentRepository>();
+            kernel.Bind<IRecipeIngredientRepository>().To<EFRecipeIngredientRepository>();
         }
     }
 }

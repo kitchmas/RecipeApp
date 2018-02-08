@@ -78,12 +78,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IIngredientRepository.cs" />
+    <Compile Include="Abstract\IRecipeIngredientRepository.cs" />
     <Compile Include="Abstract\IRecipeRepository.cs" />
     <Compile Include="Abstract\IUnitOfMeasurementRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFIngredientRepository.cs" />
     <Compile Include="Concrete\EFRecipeRepository.cs" />
     <Compile Include="Concrete\EFUnitOfMeasurmentRepository.cs" />
+    <Compile Include="Concrete\EFRecipeIngredientRepository.cs" />
     <Compile Include="Entities\Ingredient.cs" />
     <Compile Include="Entities\Recipe.cs" />
     <Compile Include="Entities\RecipeIngredient.cs" />

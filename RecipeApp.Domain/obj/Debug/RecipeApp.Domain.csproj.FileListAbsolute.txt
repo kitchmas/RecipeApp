@@ -74,3 +74,4 @@ C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.csproj.GenerateResource.Cache
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.dll
 C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.pdb
+C:\Users\thomas\Documents\Visual Studio 2015\Projects\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.csprojResolveAssemblyReference.cache

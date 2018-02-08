@@ -80,7 +80,6 @@ namespace RecipeApp.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(recipe);
         }
         [HttpGet]
@@ -91,13 +90,12 @@ namespace RecipeApp.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(dbRecipe);
         }
 
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult Delete_Post(int id)
+        public ActionResult DeletePost(int id)
         {
             Recipe deletedRecipe = repository.DeleteRecipe(id);
             if(deletedRecipe != null)

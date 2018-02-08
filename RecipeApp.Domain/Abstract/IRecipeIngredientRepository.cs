@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecipeApp.Domain.Abstract
 {
-    public interface IUnitOfMeasurementRepository
+    public interface IRecipeIngredientRepository
     {
-        IEnumerable<UnitOfMeasurement> UnitOfMeasurments { get; }
-        void SaveUnitOfMeasurement(UnitOfMeasurement unitOfMeasurement);
+        IEnumerable<RecipeIngredient> recipeIngredients { get; }
+        void SaveRecipeIngredients(RecipeIngredient recipeIngredient);
     }
-
 }

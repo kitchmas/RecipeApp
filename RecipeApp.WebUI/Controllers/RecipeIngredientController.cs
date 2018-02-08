@@ -18,11 +18,15 @@ namespace RecipeApp.WebUI.Controllers
     {
         private IIngredientRepository ingredientRepository;
         private IUnitOfMeasurementRepository unitOfMeasurementRepository;
+        private IRecipeIngredientRepository recipeIngredientRepository;
 
-        public RecipeIngredientController(IIngredientRepository IngredientRepository, IUnitOfMeasurementRepository UnitOfMeasurementRepository)
+        public RecipeIngredientController(IIngredientRepository ingredientRepository,
+            IUnitOfMeasurementRepository unitOfMeasurementRepository,
+            IRecipeIngredientRepository recipeIngredientRepository)
         {
-            this.ingredientRepository = IngredientRepository;
-            this.unitOfMeasurementRepository = UnitOfMeasurementRepository;
+            this.ingredientRepository = ingredientRepository;
+            this.unitOfMeasurementRepository = unitOfMeasurementRepository;
+            this.recipeIngredientRepository = recipeIngredientRepository;
         }
 
         // GET: RecipeIngredient
@@ -34,31 +38,66 @@ namespace RecipeApp.WebUI.Controllers
             return View("Edit", recipeIngredient);
         }
 
-        public ActionResult Edit(RecipeIngredientViewModel recipeIngredientViewModel)
+        public ActionResult Edit(int id)
         {
+            RecipeIngredient ingredient = recipeIngredientRepository.recipeIngredients.Where(r => r.RecipeIngredientID == id).FirstOrDefault();
+
+            RecipeIngredientViewModel recipeIngredientViewModel = new RecipeIngredientViewModel()
+            {
+                RecipeIngredientID = recipeIngredient.RecipeIngredientID,
+                RecipeID = recipeIngredient.RecipeID,
+                IngredientID = recipeIngredient.IngredientID,
+                UnitOfMeasurementID = recipeIngredient.UnitOfMeasurementID,
+                IngredientName = recipeIngredient.Ingredient.Name,
+                UnitOfMeasurement = recipeIngredient.UnitOfMeasurement.Name
+            };
+
+            return View("Edit", recipeIngredientViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditPost(RecipeIngredientViewModel recipeIngredientViewModel)
+        {
+            //Check if there is an ingredient and Unit of measurment are already created and if not make a new one.
             Ingredient ingredient;
-            if(recipeIngredientViewModel.IngredientID == 0)
+            UnitOfMeasurement unitOfMeasurement;
+
+            if (recipeIngredientViewModel.IngredientID == 0)
             {
                 ingredient = new Ingredient()
                 {
-                   Name = recipeIngredientViewModel.IngredientName
+                    Name = recipeIngredientViewModel.IngredientName
                 };
             }
             else
             {
                 ingredient = ingredientRepository.Ingredients.Where(i => i.IngredientID == recipeIngredientViewModel.IngredientID).FirstOrDefault();
             }
-            ingredientRepository.SaveIngredient(ingredient);.
-
-
-            //Make the same for UnitOfMeasurement
+            ingredientRepository.SaveIngredient(ingredient);
+            if (recipeIngredientViewModel.UnitOfMeasurementID == 0)
+            {
+                unitOfMeasurement = new UnitOfMeasurement()
+                {
+                    Name = recipeIngredientViewModel.UnitOfMeasurement
+                };
+            }
+            else
+            {
+                unitOfMeasurement = unitOfMeasurementRepository.UnitOfMeasurments.Where(u => u.UnitOfMeasurementID == recipeIngredientViewModel.UnitOfMeasurementID).FirstOrDefault();
+            }
+            unitOfMeasurementRepository.SaveUnitOfMeasurement(unitOfMeasurement);
 
             RecipeIngredient recipeIngredient = new RecipeIngredient()
             {
-                RecipeIngredientID = recipeIngredientViewModel.RecipeIngredientID,
                 IngredientID = ingredient.IngredientID,
                 RecipeID = recipeIngredientViewModel.RecipeID,
+                UnitOfMeasurementID = unitOfMeasurement.UnitOfMeasurementID
             };
+            recipeIngredientRepository.SaveRecipeIngredients(recipeIngredient);
+
+            TempData["message"] = string.Format("Ingredient {0} was saved", recipeIngredient.Ingredient.Name);
+
+            return RedirectToAction("Index");
         }
 
         private void PopulateIngredientsDropDown(object selectedIngredient = null)
@@ -67,16 +106,14 @@ namespace RecipeApp.WebUI.Controllers
                                   orderby i.Name
                                   select i;
             ViewBag.IngredientID = new SelectList(ingredientQuery, "IngredientID", "Name", selectedIngredient);
-
         }
 
         private void PopulateUnitOfMeasurmentDropDown(object selectedunitOfMeasurement = null)
         {
             var unitOfMeasurementQuery = from i in unitOfMeasurementRepository.UnitOfMeasurments
-                                  orderby i.Name
-                                  select i;
+                                         orderby i.Name
+                                         select i;
             ViewBag.UnitOfMeasurementID = new SelectList(unitOfMeasurementQuery, "UnitOfMeasurementID", "Name", selectedunitOfMeasurement);
-
         }
     }
 }

@@ -15,5 +15,21 @@ namespace RecipeApp.Domain.Concrete
         {
             get { return context.UnitsOfMeasurements; }
         }
+        public void SaveUnitOfMeasurement(UnitOfMeasurement unitOfMeasurement)
+        {
+            if (unitOfMeasurement.UnitOfMeasurementID == 0)
+            {
+                context.UnitsOfMeasurements.Add(unitOfMeasurement);
+            }
+            else
+            {
+                UnitOfMeasurement dbEntry = context.UnitsOfMeasurements.Find(unitOfMeasurement.UnitOfMeasurementID);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = unitOfMeasurement.Name;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }
