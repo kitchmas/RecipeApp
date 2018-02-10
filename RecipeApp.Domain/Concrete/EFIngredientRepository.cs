@@ -22,7 +22,7 @@ namespace RecipeApp.Domain.Concrete
             {
                 context.Ingredients.Add(ingredient);
             }
-            else
+            else if(context.Ingredients.Where(i => i.Name == ingredient.Name).FirstOrDefault() != null)
             {
                 Ingredient dbEntry = context.Ingredients.Find(ingredient.IngredientID);
                 if (dbEntry != null)
