@@ -58,15 +58,11 @@ namespace RecipeApp.WebUI.Controllers
         [HttpPost]
         public ActionResult Edit(RecipeIngredientViewModel recipeIngredientViewModel)
         {
-            
-
+            //Currently if the ingredient or unit of measure change then we add a new unit of measure or ingredient, maybe it should actually update the current ingredient and unit of measure.
             Ingredient ingredient = ingredientRepository.Ingredients.Where(i => i.IngredientID == recipeIngredientViewModel.IngredientID).FirstOrDefault();
-            Ingredient ingredientInDBWithSameName = ingredientRepository.Ingredients.Where(i => i.Name == recipeIngredientViewModel.IngredientName).FirstOrDefault();
-            //Checks if the ingredient has new Id
-            //if (recipeIngredientViewModel.IngredientID == 0 || (ingredientRepository.Ingredients.Where(i => i.IngredientID == recipeIngredientViewModel.IngredientID).FirstOrDefault().Name != recipeIngredientViewModel.IngredientName))
-            if (recipeIngredientViewModel.IngredientID == 0 || (ingredient.Name != recipeIngredientViewModel.IngredientName))
+            if (recipeIngredientViewModel.IngredientID == 0 || (ingredient != null && ingredient.Name != recipeIngredientViewModel.IngredientName))
             {
-                //check if ingreident with the same name already exist in the db
+                Ingredient ingredientInDBWithSameName = ingredientRepository.Ingredients.Where(i => i.Name == recipeIngredientViewModel.IngredientName).FirstOrDefault();
                 if (ingredientInDBWithSameName == null)
                 {
                     ingredient = new Ingredient()
@@ -76,38 +72,16 @@ namespace RecipeApp.WebUI.Controllers
                     ingredientRepository.SaveIngredient(ingredient);
                     recipeIngredientViewModel.IngredientID = ingredient.IngredientID;
                 }
-                //if it exists set the ingredient to the db ingredient
                 else
                 {
                     ingredient = ingredientInDBWithSameName;
                 }
             }
-            ////if the id is not 0 check if the name of the ingredient has changed.
-            //else if (ingredientRepository.Ingredients.Where(i => i.IngredientID == recipeIngredientViewModel.IngredientID).FirstOrDefault().Name != recipeIngredientViewModel.IngredientName)
-            //{
-            //    //If the name has changed check it exists in the db
-            //    if (IngredientInDBWithSameName == null)
-            //    {
-            //        ingredient = new Ingredient()
-            //        {
-            //            Name = recipeIngredientViewModel.IngredientName,
-            //        };
-            //        ingredientRepository.SaveIngredient(ingredient);
-            //        recipeIngredientViewModel.IngredientID = ingredient.IngredientID;
-            //    }
-            //    //if it exists set the ingredient to the db ingredient
-            //    else
-            //    {
-            //        ingredient = IngredientInDBWithSameName;
-            //    }
-            //}
-            //Checks if unit of measure has new Id
+   
             UnitOfMeasurement unitOfMeasurement = unitOfMeasurementRepository.UnitOfMeasurments.Where(u => u.UnitOfMeasurementID == recipeIngredientViewModel.UnitOfMeasurementID).FirstOrDefault();
-            UnitOfMeasurement unitOfMeasurementInDBWithSameName = unitOfMeasurementRepository.UnitOfMeasurments.Where(u => u.Name == recipeIngredientViewModel.UnitOfMeasurement).FirstOrDefault();
-
-            if (recipeIngredientViewModel.UnitOfMeasurementID == 0 || (unitOfMeasurement.Name != recipeIngredientViewModel.UnitOfMeasurement))
+            if (recipeIngredientViewModel.UnitOfMeasurementID == 0 || (unitOfMeasurement != null && unitOfMeasurement.Name != recipeIngredientViewModel.UnitOfMeasurement))
             {
-                //check if ingreident with the same name already exist in the db
+                UnitOfMeasurement unitOfMeasurementInDBWithSameName = unitOfMeasurementRepository.UnitOfMeasurments.Where(u => u.Name == recipeIngredientViewModel.UnitOfMeasurement).FirstOrDefault();
                 if (unitOfMeasurementInDBWithSameName == null)
                 {
                     unitOfMeasurement = new UnitOfMeasurement()
@@ -117,49 +91,12 @@ namespace RecipeApp.WebUI.Controllers
                     unitOfMeasurementRepository.SaveUnitOfMeasurement(unitOfMeasurement);
                     recipeIngredientViewModel.UnitOfMeasurementID = unitOfMeasurement.UnitOfMeasurementID;
                 }
-                //if it exists set the ingredient to the db ingredient
                 else
                 {
                     unitOfMeasurement = unitOfMeasurementInDBWithSameName;
                 }
             }
 
-            ////Copy of orginal
-            //if (recipeIngredientViewModel.UnitOfMeasurementID == 0)
-            //{
-            //    //if it is a new id check that the unit of measure isn't already in the db
-            //    if (unitOfMeasurementRepository.UnitOfMeasurments.Where(i => i.Name == recipeIngredientViewModel.UnitOfMeasurement).FirstOrDefault() == null)
-            //    {
-            //        unitOfMeasurement = new UnitOfMeasurement()
-            //        {
-            //            Name = recipeIngredientViewModel.UnitOfMeasurement,
-            //        };
-            //        unitOfMeasurementRepository.SaveUnitOfMeasurement(unitOfMeasurement);
-            //    }
-            //    // if it is in the database update the unit of measure to the db unit of measure
-            //    else
-            //    {
-            //        unitOfMeasurement = unitOfMeasurementRepository.UnitOfMeasurments.Where(i => i.Name == recipeIngredientViewModel.UnitOfMeasurement).FirstOrDefault();
-            //    }
-            //}
-            ////if the id is not 0 check if the name of the unit of measure has changed.
-            //else if (unitOfMeasurementRepository.UnitOfMeasurments.Where(u => u.UnitOfMeasurementID == recipeIngredientViewModel.UnitOfMeasurementID).FirstOrDefault().Name != recipeIngredientViewModel.UnitOfMeasurement)
-            //{
-            //    //if has changed check that if it already exists in the db
-            //    if (unitOfMeasurementRepository.UnitOfMeasurments.Where(i => i.Name == recipeIngredientViewModel.UnitOfMeasurement).FirstOrDefault() == null)
-            //    {
-            //        unitOfMeasurement = new UnitOfMeasurement()
-            //        {
-            //            Name = recipeIngredientViewModel.UnitOfMeasurement,
-            //        };
-            //        unitOfMeasurementRepository.SaveUnitOfMeasurement(unitOfMeasurement);
-            //    }
-            //    //if dose already exists set the unit of measure to the unit of measure in the database.
-            //    else
-            //    {
-            //        unitOfMeasurement = unitOfMeasurementRepository.UnitOfMeasurments.Where(i => i.Name == recipeIngredientViewModel.UnitOfMeasurement).FirstOrDefault();
-            //    }
-            //}
             RecipeIngredient recipeIngredient;
             if (recipeIngredientViewModel.RecipeIngredientID == 0)
             {
