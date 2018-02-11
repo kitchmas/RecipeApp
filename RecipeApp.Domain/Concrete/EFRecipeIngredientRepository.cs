@@ -3,6 +3,7 @@ using RecipeApp.Domain.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,17 @@ namespace RecipeApp.Domain.Concrete
                 }
             }
             context.SaveChanges();
+        }
+
+        public RecipeIngredient DeleteRecipeIngredient(int recipeIngredientID)
+        {
+            RecipeIngredient dbEntry = context.RecipeIngredients.Find(recipeIngredientID);
+            if (dbEntry != null)
+            {
+                context.RecipeIngredients.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }

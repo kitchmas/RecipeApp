@@ -95,7 +95,6 @@ C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeA
 C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\bin\Debug\System.Web.WebPages.xml
 C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.csprojResolveAssemblyReference.cache
 C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.Migrations.init.resources
 C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.Migrations.init2.resources
 C:\Users\tomk2\Documents\Visual Studio 2017\Projects\RecipeApp\RecipeApp\RecipeApp.Domain\obj\Debug\RecipeApp.Domain.Migrations.init3.resources

@@ -57,8 +57,8 @@
             <td>@Html.DisplayFor(i => Ingredient.UnitOfMeasurement.Name)</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null) |
-                @Html.ActionLink("Details", "Details", new { id = Ingredient.RecipeIngredientID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = Ingredient.RecipeIngredientID })
+                @Html.ActionLink("Details", "Details", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null) |
+                @Html.ActionLink("Delete", "Delete", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null)
             </td>
         </tr>
         }

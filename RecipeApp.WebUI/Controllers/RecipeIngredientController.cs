@@ -119,6 +119,39 @@ namespace RecipeApp.WebUI.Controllers
             return RedirectToAction("Edit", "Recipe", new { id = recipeIngredient.RecipeID });
         }
 
+        public ActionResult Delete(int id)
+        {
+            RecipeIngredient dbRecipeIngredient = recipeIngredientRepository.recipeIngredients.Where(r => r.RecipeIngredientID == id).FirstOrDefault();
+            if (dbRecipeIngredient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dbRecipeIngredient);
+        }
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeletePost(int id)
+        {
+            RecipeIngredient deletedRecipeIngredient = recipeIngredientRepository.DeleteRecipeIngredient(id);
+            if (deletedRecipeIngredient != null)
+            {
+                TempData["message"] = string.Format("Ingredient deleted");
+            }
+            return RedirectToAction("Edit","Recipe", new { id = deletedRecipeIngredient.RecipeID });
+        }
+
+        public ActionResult Details(int id)
+        {
+            RecipeIngredient dbRecipeIngredient = recipeIngredientRepository.recipeIngredients.Where(r => r.RecipeIngredientID == id).FirstOrDefault();
+            if (dbRecipeIngredient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dbRecipeIngredient);
+        }
+
+
+
         private void PopulateIngredientsDropDown(object selectedIngredient = null)
         {
             var ingredientQuery = from i in ingredientRepository.Ingredients

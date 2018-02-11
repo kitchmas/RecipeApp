@@ -1,0 +1,30 @@
+﻿@model RecipeApp.Domain.Entities.RecipeIngredient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RecipeIngredient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ingredient
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ingredient.Name)
+        </dd>
+        <dt>
+            Unit of measure
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitOfMeasurement.Name)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RecipeIngredientID }) |
+    @Html.ActionLink("Back to Recipe","Edit", "Recipe", new {id = Model.RecipeID }, null)
+</p>

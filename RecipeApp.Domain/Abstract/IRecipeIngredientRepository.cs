@@ -11,5 +11,6 @@ namespace RecipeApp.Domain.Abstract
     {
         IEnumerable<RecipeIngredient> recipeIngredients { get; }
         void SaveRecipeIngredients(RecipeIngredient recipeIngredient);
+        RecipeIngredient DeleteRecipeIngredient(int id);
     }
 }
