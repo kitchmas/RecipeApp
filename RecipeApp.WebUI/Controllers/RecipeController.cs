@@ -15,11 +15,13 @@ namespace RecipeApp.WebUI.Controllers
 {
     public class RecipeController : Controller
     {
-        private IRecipeRepository repository;
+        private IRecipeRepository recipeRepository;
+        private IRecipeIngredientRepository recipeIngredientRepository;
 
-        public RecipeController(IRecipeRepository recipeRepository)
+        public RecipeController(IRecipeRepository recipeRepository, IRecipeIngredientRepository recipeIngredientRepository)
         {
-            this.repository = recipeRepository;
+            this.recipeRepository = recipeRepository;
+            this.recipeIngredientRepository = recipeIngredientRepository;
         }
 
         // GET: Recipe
@@ -27,7 +29,7 @@ namespace RecipeApp.WebUI.Controllers
         {
             var viewModel = new RecipesViewModel()
             {
-                Recipes = repository.Recipes.OrderBy(r => r.Name)
+                Recipes = recipeRepository.Recipes.OrderBy(r => r.Name)
             };
             //if (id != null)
             //{
@@ -39,7 +41,7 @@ namespace RecipeApp.WebUI.Controllers
 
         public ActionResult Details(int id)
         {
-            Recipe recipe = repository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
+            Recipe recipe = recipeRepository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
             if (recipe == null)
             {
                 return HttpNotFound();
@@ -61,8 +63,8 @@ namespace RecipeApp.WebUI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    repository.SaveRecipe(recipe);
-                    return RedirectToAction("Index");
+                    recipeRepository.SaveRecipe(recipe);
+                    return View(recipe);
                 }
             }
             catch (RetryLimitExceededException /* dex */)
@@ -75,7 +77,7 @@ namespace RecipeApp.WebUI.Controllers
 
         public ActionResult Edit(int id)
         {
-            Recipe recipe = repository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
+            Recipe recipe = recipeRepository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
             if(recipe == null)
             {
                 return HttpNotFound();
@@ -85,7 +87,7 @@ namespace RecipeApp.WebUI.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            Recipe dbRecipe = repository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
+            Recipe dbRecipe = recipeRepository.Recipes.Where(r => r.RecipeID == id).FirstOrDefault();
             if(dbRecipe == null)
             {
                 return HttpNotFound();
@@ -97,9 +99,18 @@ namespace RecipeApp.WebUI.Controllers
         [ActionName("Delete")]
         public ActionResult DeletePost(int id)
         {
-            Recipe deletedRecipe = repository.DeleteRecipe(id);
+            Recipe deletedRecipe = recipeRepository.DeleteRecipe(id);
+
             if(deletedRecipe != null)
             {
+                //Delete the recipies recipe ingredients.
+                var recipeIngredients = recipeIngredientRepository.recipeIngredients.Where(r => r.RecipeID == deletedRecipe.RecipeID).ToList();
+
+                foreach(var recipeIngredient in recipeIngredients)
+                {
+                    recipeIngredientRepository.DeleteRecipeIngredient(recipeIngredient.RecipeIngredientID);
+                }
+
                 TempData["message"] = string.Format("{0} was deleted", deletedRecipe.Name);
             }
             return RedirectToAction("Index");

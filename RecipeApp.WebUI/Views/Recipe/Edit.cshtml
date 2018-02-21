@@ -6,10 +6,10 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm("Edit","Recipe"))
+@using (Html.BeginForm("Edit", "Recipe"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Recipe</h4>
         <hr />
@@ -47,25 +47,27 @@
     </div>
 }
 <h4>Ingredients</h4>
-@if (Model.RecipeIngredients != null && Model.RecipeIngredients.Count != 0)
+@if (Model.RecipeIngredients != null && Model.RecipeIngredients.Count != 0 && Model.RecipeID != 0)
 {
     <table>
         @foreach (var Ingredient in Model.RecipeIngredients)
         {
-        <tr>
-            <td>@Html.DisplayFor(i => Ingredient.Ingredient.Name)</td>
-            <td>@Html.DisplayFor(i => Ingredient.UnitOfMeasurement.Name)</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null) |
-                @Html.ActionLink("Details", "Details", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null) |
-                @Html.ActionLink("Delete", "Delete", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null)
-            </td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(i => Ingredient.Ingredient.Name)</td>
+                <td>@Html.DisplayFor(i => Ingredient.UnitOfMeasurement.Name)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null) |
+                    @Html.ActionLink("Details", "Details", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "RecipeIngredient", new { id = Ingredient.RecipeIngredientID }, null)
+                </td>
+            </tr>
         }
     </table>
 }
-@Html.ActionLink("Add", "Create","RecipeIngredient", new { id = Model.RecipeID }, null)
-<span>@Model.RecipeID</span>
+@if (Model.RecipeID != 0)
+{
+    @Html.ActionLink("Add", "Create", "RecipeIngredient", new { id = Model.RecipeID }, null)
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index")
